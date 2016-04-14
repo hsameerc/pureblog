@@ -1,0 +1,1 @@
+<input class="span3" id="appendedInputButton" size="16" type="text"><button class="btn" type="button"><i class="fa fa-search"></i></button> 
