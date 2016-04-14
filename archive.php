@@ -5,8 +5,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 get_header();
 ?>
@@ -16,13 +16,13 @@ get_header();
             <div class="span9">
                 <h3><?php
                     if (is_day()) :
-                        printf(__('Daily Archives: %s', 'kumaley'), '<span>' . get_the_date() . '</span>');
+                        printf(__('Daily Archives: %s', 'pureblog'), '<span>' . get_the_date() . '</span>');
                     elseif (is_month()) :
-                        printf(__('Monthly Archives: %s', 'kumaley'), '<span>' . get_the_date(_x('F Y', 'monthly archives date format', 'kumaley')) . '</span>');
+                        printf(__('Monthly Archives: %s', 'pureblog'), '<span>' . get_the_date(_x('F Y', 'monthly archives date format', 'pureblog')) . '</span>');
                     elseif (is_year()) :
-                        printf(__('Yearly Archives: %s', 'kumaley'), '<span>' . get_the_date(_x('Y', 'yearly archives date format', 'kumaley')) . '</span>');
+                        printf(__('Yearly Archives: %s', 'pureblog'), '<span>' . get_the_date(_x('Y', 'yearly archives date format', 'pureblog')) . '</span>');
                     else :
-                        _e('Archives', 'kumaley');
+                        _e('Archives', 'pureblog');
                     endif;
                     ?></h3> 
                 <div class="breadcrumbs">
@@ -55,7 +55,7 @@ get_header();
                 <?php while (have_posts()) : the_post(); ?>
                     <?php get_template_part('content', get_post_format()); ?>
                 <?php endwhile; ?>
-                <?php kumaley_content_nav('nav-below'); ?>
+                <?php pureblog_content_nav('nav-below'); ?>
             <?php else : ?>
                 <?php get_template_part('content', 'none'); ?>
         <?php endif; // end have_posts() check   ?> 

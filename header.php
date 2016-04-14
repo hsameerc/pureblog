@@ -5,8 +5,8 @@
  * Displays all of the <head> section and everything up till <div class="row header">
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -16,12 +16,12 @@
         <title><?php wp_title('|', true, 'right'); ?></title>
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-        <link rel="shortcut icon" href="<?php if (kumaley_get_option('kumaley_favicon') != '') { ?><?php echo kumaley_get_option('kumaley_favicon'); ?><?php } else { ?><?php echo esc_url(get_template_directory_uri()); ?>/images/favicon.ico <?php } ?>" type="image/x-icon" />
+        <link rel="shortcut icon" href="<?php if (pureblog_get_option('pureblog_favicon') != '') { ?><?php echo pureblog_get_option('pureblog_favicon'); ?><?php } else { ?><?php echo esc_url(get_template_directory_uri()); ?>/images/favicon.ico <?php } ?>" type="image/x-icon" />
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
         <?php wp_head(); ?>
-        <?php if (kumaley_get_option('kumaley_customcss') != '') { ?>
+        <?php if (pureblog_get_option('pureblog_customcss') != '') { ?>
             <style>
-    <?php echo kumaley_get_option('kumaley_customcss'); ?>
+    <?php echo pureblog_get_option('pureblog_customcss'); ?>
             </style>
         <?php } ?>
     </head> 
@@ -33,7 +33,7 @@
                 <div class="span4">
                     <!-- logo -->
                     <a href="?page=index">
-                        <img class="logo" src="<?php if (kumaley_get_option('kumaley_logo') != '') { ?><?php echo kumaley_get_option('kumaley_logo'); ?><?php } else { ?><?php echo esc_url(get_template_directory_uri()); ?>/images/logo.png <?php } ?>" alt="<?php bloginfo('name'); ?> logo" style="width:207px;"/>
+                        <img class="logo" src="<?php if (pureblog_get_option('pureblog_logo') != '') { ?><?php echo pureblog_get_option('pureblog_logo'); ?><?php } else { ?><?php echo esc_url(get_template_directory_uri()); ?>/images/logo.png <?php } ?>" alt="<?php bloginfo('name'); ?> logo" style="width:207px;"/>
                     </a>
 
                 </div>

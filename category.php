@@ -5,8 +5,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 get_header();
 ?>
@@ -14,7 +14,7 @@ get_header();
     <div class="container header-bar">
         <div class="row">
             <div class="span9">
-                <h3><?php printf(__('Category Archives: %s', 'kumaley'), '<span>' . single_cat_title('', false) . '</span>'); ?></h3>  
+                <h3><?php printf(__('Category Archives: %s', 'pureblog'), '<span>' . single_cat_title('', false) . '</span>'); ?></h3>  
                 <div class="breadcrumbs">
                     <?php
                     if (function_exists('bcn_display')) {
@@ -45,7 +45,7 @@ get_header();
                 <?php while (have_posts()) : the_post(); ?>
                     <?php get_template_part('content', get_post_format()); ?>
                 <?php endwhile; ?>
-                <?php kumaley_content_nav('nav-below'); ?>
+                <?php pureblog_content_nav('nav-below'); ?>
             <?php else : ?>
                 <?php get_template_part('content', 'none'); ?>
             <?php endif; // end have_posts() check  ?> 

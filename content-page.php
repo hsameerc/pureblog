@@ -3,8 +3,8 @@
  * The template used for displaying page content in page.php
  *
  * @package WordPress
- * @subpackage blankSlate
- * @since blankSlate 3.5
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 ?>
 
@@ -14,9 +14,9 @@
     </header>
     <div class="entry-content">
         <?php the_content(); ?>
-        <?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'twentytwelve'), 'after' => '</div>')); ?>
+        <?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'pureblog'), 'after' => '</div>')); ?>
     </div><!-- .entry-content -->
     <footer class="entry-meta">
-        <?php edit_post_link(__('Edit', 'twentytwelve'), '<span class="edit-link">', '</span>'); ?>
+        <?php edit_post_link(__('Edit', 'pureblog'), '<span class="edit-link">', '</span>'); ?>
     </footer><!-- .entry-meta -->
 </article><!-- #post -->

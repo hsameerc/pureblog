@@ -3,8 +3,8 @@
  * The default template for displaying image.
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 get_header();
 ?>
@@ -12,7 +12,7 @@ get_header();
     <div class="container header-bar">
         <div class="row">
             <div class="span9">
-                <h3><?php printf(__('Category Archives: %s', 'kumaley'), '<span>' . single_cat_title('', false) . '</span>'); ?></h3>  
+                <h3><?php printf(__('Category Archives: %s', 'pureblog'), '<span>' . single_cat_title('', false) . '</span>'); ?></h3>  
                 <div class="breadcrumbs">
                     <?php
                     if (function_exists('bcn_display')) {
@@ -44,7 +44,7 @@ get_header();
                     <header class="entry-header">
                         <div class="entry-meta-left">
                             <div class="entry-date-wrap">
-                                <?php kumaley_entry_date(); ?>
+                                <?php pureblog_entry_date(); ?>
                             </div>  
                             <div class="entry-post-format-wrap">
                                 <?php if (is_sticky() && is_home() && !is_paged()) : ?><i class="fa fa-thumb-tack"></i><?php else: ?><i class="fa fa-pencil"></i><?php endif; ?>
@@ -59,12 +59,12 @@ get_header();
                         <?php else : ?>
                             <hgroup>
                                 <h3 class="entry-title">
-                                    <a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'kumaley'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
+                                    <a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'pureblog'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
                                 </h3>
                             </hgroup>
                         <?php endif; // is_single() ?> 
                         <div class="entry-meta">
-                            <?php kumaley_entry_meta(); ?> 
+                            <?php pureblog_entry_meta(); ?> 
                         </div>
                     </header><!-- .entry-header --> 
                     <div class="entry-content">

@@ -3,8 +3,8 @@
  * The Template for displaying pages.
  *
  * @package WordPress
- * @subpackage blankSlate
- * @since blankSlate 3.5
+ * @subpackage Pureblog
+ * @since Pureblog 3.5
  */
 get_header();
 ?>

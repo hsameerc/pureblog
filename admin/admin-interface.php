@@ -5,34 +5,34 @@
 /* ----------------------------------------------------------------------------------- */
 // Load static framework options pages 
 $functions_path = get_template_directory() . '/admin/';
-function kumaley_optionsframework_add_admin() {
+function pureblog_optionsframework_add_admin() {
     global $query_string;
 
-    $themename = kumaley_get_option('of_themename');
-    $shortname = kumaley_get_option('of_shortname');
+    $themename = pureblog_get_option('of_themename');
+    $shortname = pureblog_get_option('of_shortname');
 
     if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'optionsframework') {
         if (isset($_REQUEST['of_save']) && 'reset' == $_REQUEST['of_save']) {
-            $options = kumaley_get_option('of_template');
-            kumaley_reset_options($options, 'optionsframework');
+            $options = pureblog_get_option('of_template');
+            pureblog_reset_options($options, 'optionsframework');
             header("Location: admin.php?page=optionsframework&reset=true");
             die;
         }
     }
 
 
-    $of_page = add_theme_page($themename, 'Theme Options', 'edit_theme_options', 'optionsframework', 'kumaley_optionsframework_options_page', 'div');
+    $of_page = add_theme_page($themename, 'Theme Options', 'edit_theme_options', 'optionsframework', 'pureblog_optionsframework_options_page', 'div');
 
     // Add framework functionaily to the head individually
-    add_action("admin_print_scripts-$of_page", 'kumaley_load_only');
+    add_action("admin_print_scripts-$of_page", 'pureblog_load_only');
 }
 
-add_action('admin_menu', 'kumaley_optionsframework_add_admin');
+add_action('admin_menu', 'pureblog_optionsframework_add_admin');
 /* ----------------------------------------------------------------------------------- */
 /* Options Framework Reset Function - of_reset_options */
 /* ----------------------------------------------------------------------------------- */
 
-function kumaley_reset_options($options, $page = '') {
+function pureblog_reset_options($options, $page = '') {
     global $wpdb;
     $count = 0;
 
@@ -52,22 +52,22 @@ function kumaley_reset_options($options, $page = '') {
 
             if ($option_type == 'multicheck') {
                 foreach ($option['options'] as $option_key => $option_option) {
-                    kumaley_delete_option("{$option_id}_{$option_key}");
+                    pureblog_delete_option("{$option_id}_{$option_key}");
                 }
             } else if (is_array($option_type)) {
                 foreach ($option_type as $inner_option) {
                     $option_id = $inner_option['id'];
-                    kumaley_delete_option($option_id);
+                    pureblog_delete_option($option_id);
                 }
             } else {
-                kumaley_delete_option($option_id);
+                pureblog_delete_option($option_id);
             }
         }
     }
 
     //When Theme Options page is reset - Add the of_options option
     if ($page == 'optionsframework') {
-        kumaley_delete_option('of_options');
+        pureblog_delete_option('of_options');
     }
 }
 
@@ -75,16 +75,16 @@ function kumaley_reset_options($options, $page = '') {
 /* Build the Options Page - optionsframework_options_page */
 /* ----------------------------------------------------------------------------------- */
 
-function kumaley_optionsframework_options_page() {
-    $options = kumaley_get_option('of_template');
-    $themename = kumaley_get_option('of_themename');
+function pureblog_optionsframework_options_page() {
+    $options = pureblog_get_option('of_template');
+    $themename = pureblog_get_option('of_themename');
     ?> 
     <div class="wrap" id="of_container">
         <div id="of-popup-save" class="of-save-popup">
-            <div class="of-save-save"><?php _e('Options Updated', 'kumaley'); ?></div>
+            <div class="of-save-save"><?php _e('Options Updated', 'pureblog'); ?></div>
         </div>
         <div id="of-popup-reset" class="of-save-popup">
-            <div class="of-save-reset"><?php _e('Options Reset', 'kumaley'); ?></div>
+            <div class="of-save-reset"><?php _e('Options Reset', 'pureblog'); ?></div>
         </div>
         <form action="" enctype="multipart/form-data" id="ofform">
             <?php wp_nonce_field('theme-update-option'); ?>
@@ -92,7 +92,7 @@ function kumaley_optionsframework_options_page() {
                 <div class="logo">
                     <h2><?php
                         echo $themename;
-                        _e(' Options', 'kumaley');
+                        _e(' Options', 'pureblog');
                         ?></h2>
                 </div>
                 <a href="<?php esc_url($site_url); ?>" target="new">
@@ -102,7 +102,7 @@ function kumaley_optionsframework_options_page() {
             </div>
             <?php
             // Rev up the Options Machine
-            $return = kumaley_optionsframework_machine($options);
+            $return = pureblog_optionsframework_machine($options);
             ?>
             <div id="main">
                 <div id="of-nav">
@@ -135,7 +135,7 @@ function kumaley_optionsframework_options_page() {
 /* Load required javascripts for Options Page - of_load_only */
 /* ----------------------------------------------------------------------------------- */
 
-function kumaley_load_only() {
+function pureblog_load_only() {
     add_action('admin_head', 'of_admin_head');
 
     wp_enqueue_script('jquery-ui-core');
@@ -154,17 +154,17 @@ function kumaley_load_only() {
                     jQuery(document).ready(function () {
                         //Color Picker
         <?php
-        $options = kumaley_get_option('of_template');
+        $options = pureblog_get_option('of_template');
         foreach ($options as $option) {
             if ($option['type'] == 'color' OR $option['type'] == 'typography' OR $option['type'] == 'border') {
                 if ($option['type'] == 'typography' OR $option['type'] == 'border') {
                     $option_id = $option['id'];
-                    $temp_color = kumaley_get_option($option_id);
+                    $temp_color = pureblog_get_option($option_id);
                     $option_id = $option['id'] . '_color';
                     $color = $temp_color['color'];
                 } else {
                     $option_id = $option['id'];
-                    $color = kumaley_get_option($option_id);
+                    $color = pureblog_get_option($option_id);
                 }
                 ?>
                                 jQuery('#<?php echo $option_id; ?>_picker').children('div').css('backgroundColor', '<?php echo $color; ?>');
@@ -454,11 +454,11 @@ function kumaley_load_only() {
 }
 
 /* ----------------------------------------------------------------------------------- */
-/* Ajax Save Action - kumaley_ajax_callback */
+/* Ajax Save Action - pureblog_ajax_callback */
 /* ----------------------------------------------------------------------------------- */
-add_action('wp_ajax_of_ajax_post_action', 'kumaley_ajax_callback');
+add_action('wp_ajax_of_ajax_post_action', 'pureblog_ajax_callback');
 
-function kumaley_ajax_callback() {
+function pureblog_ajax_callback() {
     global $wpdb; // this is how you get access to the database
 
 
@@ -475,7 +475,7 @@ function kumaley_ajax_callback() {
         $uploaded_file = wp_handle_upload($filename, $override);
 
         $upload_tracking[] = $clickedID;
-        kumaley_update_option($clickedID, $uploaded_file['url']);
+        pureblog_update_option($clickedID, $uploaded_file['url']);
 
         if (!empty($uploaded_file['error'])) {
             echo 'Upload Error: ' . $uploaded_file['error'];
@@ -485,18 +485,18 @@ function kumaley_ajax_callback() {
     } elseif ($save_type == 'image_reset') {
 
         $id = $_POST['data']; // Acts as the name
-        kumaley_delete_option($id);
+        pureblog_delete_option($id);
     } elseif ($save_type == 'options' OR $save_type == 'framework') {
         $data = $_POST['data'];
 
         parse_str($data, $output);
         //print_r($output);
         //Pull options
-        $options = kumaley_get_option('of_template');
+        $options = pureblog_get_option('of_template');
 
         foreach ($options as $option_array) {
             $id = $option_array['id'];
-            $old_value = kumaley_get_option($id);
+            $old_value = pureblog_get_option($id);
             $new_value = '';
 
             if (isset($output[$id])) {
@@ -515,13 +515,13 @@ function kumaley_ajax_callback() {
                             if ($new_value == '') {
                                 $new_value = $std;
                             }
-                            kumaley_update_option($id, stripslashes($new_value));
+                            pureblog_update_option($id, stripslashes($new_value));
                         }
                     }
                 } elseif ($new_value == '' && $type == 'checkbox') { // Checkbox Save
-                    kumaley_update_option($id, 'false');
+                    pureblog_update_option($id, 'false');
                 } elseif ($new_value == 'true' && $type == 'checkbox') { // Checkbox Save
-                    kumaley_update_option($id, 'true');
+                    pureblog_update_option($id, 'true');
                 } elseif ($type == 'multicheck') { // Multi Check Save
                     $option_options = $option_array['options'];
 
@@ -530,9 +530,9 @@ function kumaley_ajax_callback() {
                         $multicheck_id = $id . "_" . $options_id;
 
                         if (!isset($output[$multicheck_id])) {
-                            kumaley_update_option($multicheck_id, 'false');
+                            pureblog_update_option($multicheck_id, 'false');
                         } else {
-                            kumaley_update_option($multicheck_id, 'true');
+                            pureblog_update_option($multicheck_id, 'true');
                         }
                     }
                 } elseif ($type == 'typography') {
@@ -547,7 +547,7 @@ function kumaley_ajax_callback() {
 
                     $typography_array['color'] = $output[$option_array['id'] . '_color'];
 
-                    kumaley_update_option($id, $typography_array);
+                    pureblog_update_option($id, $typography_array);
                 } elseif ($type == 'border') {
 
                     $border_array = array();
@@ -558,10 +558,10 @@ function kumaley_ajax_callback() {
 
                     $border_array['color'] = $output[$option_array['id'] . '_color'];
 
-                    kumaley_update_option($id, $border_array);
+                    pureblog_update_option($id, $border_array);
                 } elseif ($type != 'upload_min') {
 
-                    kumaley_update_option($id, stripslashes($new_value));
+                    pureblog_update_option($id, stripslashes($new_value));
                 }
             }
         }
@@ -573,7 +573,7 @@ function kumaley_ajax_callback() {
 /* Generates The Options Within the Panel - optionsframework_machine */
 /* ----------------------------------------------------------------------------------- */
 
-function kumaley_optionsframework_machine($options) {
+function pureblog_optionsframework_machine($options) {
 
     $counter = 0;
     $menu = '';
@@ -599,7 +599,7 @@ function kumaley_optionsframework_machine($options) {
 
             case 'text':
                 $val = $value['std'];
-                $std = kumaley_get_option($value['id']);
+                $std = pureblog_get_option($value['id']);
                 if ($std != "") {
                     $val = $std;
                 }
@@ -609,7 +609,7 @@ function kumaley_optionsframework_machine($options) {
             case 'select':
                 $output .= '<select class="of-input" name="' . $value['id'] . '" id="' . $value['id'] . '">';
 
-                $select_value = kumaley_get_option($value['id']);
+                $select_value = pureblog_get_option($value['id']);
 
                 foreach ($value['options'] as $option) {
 
@@ -655,7 +655,7 @@ function kumaley_optionsframework_machine($options) {
                         }
                     }
                 }
-                $std = kumaley_get_option($value['id']);
+                $std = pureblog_get_option($value['id']);
                 if ($std != "") {
                     $ta_value = stripslashes($std);
                 }
@@ -681,7 +681,7 @@ function kumaley_optionsframework_machine($options) {
                         }
                     }
                 }
-                $std = kumaley_get_option($value['id']);
+                $std = pureblog_get_option($value['id']);
                 if ($std != "") {
                     $ta_value = stripslashes($std);
                 }
@@ -691,7 +691,7 @@ function kumaley_optionsframework_machine($options) {
                 break;
             case "radio":
 
-                $select_value = kumaley_get_option($value['id']);
+                $select_value = pureblog_get_option($value['id']);
 
                 foreach ($value['options'] as $key => $option) {
                     $checked = '';
@@ -710,7 +710,7 @@ function kumaley_optionsframework_machine($options) {
             case "checkbox":
                 $explain_value = $value['desc'];
                 $val = $value['std'];
-                $std = kumaley_get_option($value['id']);
+                $std = pureblog_get_option($value['id']);
                 if ($std != "") {
                     $val = $std;
                 }
@@ -733,17 +733,17 @@ function kumaley_optionsframework_machine($options) {
             case "upload":
                 $value['std'] = '';
                 if (isset($value['std'])) {
-                    $output .= kumaley_optionsframework_uploader_function($value['id'], $value['std'], null);
+                    $output .= pureblog_optionsframework_uploader_function($value['id'], $value['std'], null);
                 }
                 break;
             case "upload_min":
 
-                $output .= kumaley_optionsframework_uploader_function($value['id'], $value['std'], 'min');
+                $output .= pureblog_optionsframework_uploader_function($value['id'], $value['std'], 'min');
 
                 break;
             case "color":
                 $val = $value['std'];
-                $stored = kumaley_get_option($value['id']);
+                $stored = pureblog_get_option($value['id']);
                 if ($stored != "") {
                     $val = $stored;
                 }
@@ -754,7 +754,7 @@ function kumaley_optionsframework_machine($options) {
             case "typography":
 
                 $default = $value['std'];
-                $typography_stored = kumaley_get_option($value['id']);
+                $typography_stored = pureblog_get_option($value['id']);
 
                 /* Font Size */
                 $val = $default['size'];
@@ -862,7 +862,7 @@ function kumaley_optionsframework_machine($options) {
             case "border":
 
                 $default = $value['std'];
-                $border_stored = kumaley_get_option($value['id']);
+                $border_stored = pureblog_get_option($value['id']);
 
                 /* Border Width */
                 $val = $default['width'];
@@ -952,7 +952,7 @@ function kumaley_optionsframework_machine($options) {
 
                 $id = $array['id'];
                 $std = $array['std'];
-                $saved_std = kumaley_get_option($id);
+                $saved_std = pureblog_get_option($id);
                 if ($saved_std != $std) {
                     $std = $saved_std;
                 }
@@ -985,20 +985,20 @@ function kumaley_optionsframework_machine($options) {
 }
 
 /* ----------------------------------------------------------------------------------- */
-/* OptionsFramework Uploader - kumaley_optionsframework_uploader_function */
+/* OptionsFramework Uploader - pureblog_optionsframework_uploader_function */
 /* ----------------------------------------------------------------------------------- */
 
-function kumaley_optionsframework_uploader_function($id, $std, $mod) {
+function pureblog_optionsframework_uploader_function($id, $std, $mod) {
     //$uploader .= '<input type="file" id="attachement_'.$id.'" name="attachement_'.$id.'" class="upload_input"></input>';
     //$uploader .= '<span class="submit"><input name="save" type="submit" value="Upload" class="button upload_save" /></span>';
 
     $uploader = '';
-    $upload = kumaley_get_option($id);
+    $upload = pureblog_get_option($id);
 
     if ($mod != 'min') {
         $val = $std;
-        if (kumaley_get_option($id) != "") {
-            $val = kumaley_get_option($id);
+        if (pureblog_get_option($id) != "") {
+            $val = pureblog_get_option($id);
         }
         $uploader .= '<input class=\'of-input\' name=\'' . $id . '\' id=\'' . $id . '_upload\' type=\'text\' value=\'' . str_replace("'", "", $val) . '\' />';
     }

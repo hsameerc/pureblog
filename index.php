@@ -10,8 +10,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 get_header();
 ?>
@@ -20,7 +20,7 @@ get_header();
         <div class="row">
             <div class="span9">
                 <?php $post_page = get_option( 'page_for_posts' );  ?>
-                <h3><?php if($post_page): echo get_the_title($post_page); else: _e('Our Blog','kumaley'); endif; ?></h3> 
+                <h3><?php if($post_page): echo get_the_title($post_page); else: _e('Our Blog','pureblog'); endif; ?></h3> 
                 <div class="breadcrumbs">
                     <?php
                     if (function_exists('bcn_display')) {
@@ -48,7 +48,7 @@ get_header();
                 <?php while (have_posts()) : the_post(); ?>
                     <?php get_template_part('content', get_post_format()); ?>
                 <?php endwhile; ?>
-                <?php kumaley_content_nav('nav-below'); ?>
+                <?php pureblog_content_nav('nav-below'); ?>
             <?php else : ?>
                 <article id="post-0" class="post no-results not-found">
                     <?php
@@ -56,20 +56,20 @@ get_header();
                         // Show a different message to a logged-in user who can add posts.
                         ?>
                         <header class="entry-header" style="position:relative;">
-                            <h1><?php _e('No posts to display', 'kumaley'); ?></h1>
+                            <h1><?php _e('No posts to display', 'pureblog'); ?></h1>
                         </header>
                         <div class="entry-content">
-                            <p><?php printf(__('Ready to publish your first post? <a href="%s">Get started here</a>.', 'kumaley'), admin_url('post-new.php')); ?></p>
+                            <p><?php printf(__('Ready to publish your first post? <a href="%s">Get started here</a>.', 'pureblog'), admin_url('post-new.php')); ?></p>
                         </div><!-- .entry-content -->
                         <?php
                     else :
                         // Show the default message to everyone else.
                         ?>
                         <header class="entry-header" style="position:relative;">
-                            <h1><?php _e('Nothing Found', 'kumaley'); ?></h1>
+                            <h1><?php _e('Nothing Found', 'pureblog'); ?></h1>
                         </header>
                         <div class="entry-content">
-                            <p><?php _e('Apologies, but no results were found. Perhaps searching will help find a related post.', 'kumaley'); ?></p>
+                            <p><?php _e('Apologies, but no results were found. Perhaps searching will help find a related post.', 'pureblog'); ?></p>
                             <?php get_search_form(); ?>
                         </div><!-- .entry-content -->
                     <?php endif; // end current_user_can() check  ?>

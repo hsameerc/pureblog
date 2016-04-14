@@ -8,7 +8,7 @@ function of_style_path() {
     if ($style != '') {
         $style_path = $style;
     } else {
-        $stylesheet = kumaley_get_option('of_alt_stylesheet');
+        $stylesheet = pureblog_get_option('of_alt_stylesheet');
         $style_path = str_replace(".css", "", $stylesheet);
     }
     if ($style_path == "default")
@@ -22,15 +22,15 @@ function of_style_path() {
 /* ----------------------------------------------------------------------------------- */
 if (is_admin() && isset($_GET['activated']) && $pagenow == "themes.php") {
     //Call action that sets
-    add_action('admin_head', 'kumaley_option_setup');
+    add_action('admin_head', 'pureblog_option_setup');
 }
 
-function kumaley_option_setup() {
+function pureblog_option_setup() {
     //Update EMPTY options
     $of_array = array();
-    add_option('kumaley_options', $of_array);
-    $template = kumaley_get_option('of_template');
-    $saved_options = kumaley_get_option('kumaley_options');
+    add_option('pureblog_options', $of_array);
+    $template = pureblog_get_option('of_template');
+    $saved_options = pureblog_get_option('pureblog_options');
     $std = '';
     foreach ($template as $option) {
         if ($option['type'] != 'heading') {
@@ -38,17 +38,17 @@ function kumaley_option_setup() {
             if (isset($option['std'])) {
                 $std = $option['std'];
             }
-            $db_option = kumaley_get_option($id);
+            $db_option = pureblog_get_option($id);
             if (empty($db_option)) {
                 if (is_array($option['type'])) {
                     foreach ($option['type'] as $child) {
                         $c_id = $child['id'];
                         $c_std = $child['std'];
-                        kumaley_update_option($c_id, $c_std);
+                        pureblog_update_option($c_id, $c_std);
                         $of_array[$c_id] = $c_std;
                     }
                 } else {
-                    kumaley_update_option($id, $std);
+                    pureblog_update_option($id, $std);
                     $of_array[$id] = $std;
                 }
             } else { //So just store the old values over again.
@@ -56,7 +56,7 @@ function kumaley_option_setup() {
             }
         }
     }
-    kumaley_update_option('of_options', $of_array);
+    pureblog_update_option('of_options', $of_array);
 }
 
 /* ----------------------------------------------------------------------------------- */

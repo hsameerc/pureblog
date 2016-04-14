@@ -5,8 +5,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Kumaley
- * @since Kumaley 1.0
+ * @subpackage Pureblog
+ * @since Pureblog 1.0
  */
 get_header();
 ?>
@@ -14,7 +14,7 @@ get_header();
     <div class="container header-bar">
         <div class="row">
             <div class="span9">
-                <h3><?php printf(__('Author Archives: %s', 'kumaley'), '<span class="vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta("ID"))) . '" title="' . esc_attr(get_the_author()) . '" rel="me">' . get_the_author() . '</a></span>'); ?></h3>  
+                <h3><?php printf(__('Author Archives: %s', 'pureblog'), '<span class="vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta("ID"))) . '" title="' . esc_attr(get_the_author()) . '" rel="me">' . get_the_author() . '</a></span>'); ?></h3>  
                 <div class="breadcrumbs">
                     <?php
                     if (function_exists('bcn_display')) {
@@ -45,7 +45,7 @@ get_header();
                 <?php while (have_posts()) : the_post(); ?>
                     <?php get_template_part('content', get_post_format()); ?>
                 <?php endwhile; ?>
-                <?php kumaley_content_nav('nav-below'); ?>
+                <?php pureblog_content_nav('nav-below'); ?>
             <?php else : ?>
                 <?php get_template_part('content', 'none'); ?>
             <?php endif; // end have_posts() check  ?> 
