@@ -1,0 +1,1 @@
+Pure Blog is a minimalist theme with strong typography, designed for those who want to make a bold statement in a simple way. You can further customize Pure Blog with a background, logo, or widgets.

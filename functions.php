@@ -319,7 +319,18 @@ if (!function_exists('pureblog_comment')) :
      * Theme Options 
      *
      * @since Pureblog 1.0
-     */ 
+     */
+    /* Globals */
+    global $site_layout, $header_show;
+    $site_layout = array('pull-right' =>  esc_html__('Left Sidebar','pureblog'), 'side-right' => esc_html__('Right Sidebar','pureblog'), 'no-sidebar' => esc_html__('No Sidebar','pureblog'),'full-width' => esc_html__('Full Width', 'pureblog'));
+    $header_show = array(
+        'logo-only' => __('Logo Only', 'pureblog'),
+        'logo-text' => __('Logo + Tagline', 'pureblog'),
+        'title-only' => __('Title Only', 'pureblog'),
+        'title-text' => __('Title + Tagline', 'pureblog')
+    );
+    require get_template_directory() . '/inc/customizer.php'; 
+
     include_once get_template_directory() . '/admin/admin-functions.php';
     include_once get_template_directory() . '/admin/admin-interface.php';
     include_once get_template_directory() . '/admin/theme-options.php';
